@@ -1,6 +1,8 @@
 import React from 'react';
 
-const SearchPannel = () => {
+import './search-panel.css'
+
+const SearchPanel = () => {
 	return (
 		<input className="form-control search-input" 
 			type="text" 
@@ -8,4 +10,4 @@ const SearchPannel = () => {
 	);
 }
 
-export default SearchPannel;
+export default SearchPanel;
