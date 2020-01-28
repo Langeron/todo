@@ -8,7 +8,7 @@ export default class TodoListItem extends Component {
 	};
 
 	onLabelClick = () => {
-		this.setState(({done}, props) => {
+		this.setState(({done}) => {
 			return {
 				done: !done
 			};
