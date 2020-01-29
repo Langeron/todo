@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 import './item-add-form.css';
 
 export default class ItemAddForm extends Component {
-
 	state = {
 		label: ''
 	}
-
+	
 	onLabelChange =(evt) => {
 		this.setState({
 			label: evt.target.value

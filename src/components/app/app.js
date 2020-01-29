@@ -23,6 +23,8 @@ export default class App extends Component {
 			label,
 			important: false,
 			done: false,
+			render: true,
+			filterBySearch: true,
 			id: this.maxId++
 		}
 	}
@@ -76,6 +78,71 @@ export default class App extends Component {
 		});
 	};
 
+	filterByActive = () => {
+		this.setState(({todoData}) => {
+			const newArray = todoData.map((el) => {
+				if (el.done) {
+					el.render = false;
+				} else {
+					el.render = true;
+				};
+				return el;
+			});
+
+			return {
+				todoData: newArray
+			}
+		})
+	};
+
+	filterByDone = () => {
+		this.setState(({todoData}) => {
+			const newArray = todoData.map((el) => {
+				if (el.done) {
+					el.render = true;
+				} else {
+					el.render = false;
+				};
+				return el;
+			});
+
+			return {
+				todoData: newArray
+			}
+		})
+	};
+
+	filterByAll = () => {
+		this.setState(({todoData}) => {
+			const newArray = todoData.map((el) =>  {
+				el.render = true;
+				return el;
+			});
+			return {
+				todoData: newArray
+			}
+		})
+	};
+
+	filterBySearch = (value) => {
+		this.setState(({todoData}) => {
+			const newArray = todoData.map((el) => {
+				if (el.label.toLowerCase().includes(value.toLowerCase())) {
+					el.filterBySearch = true;
+				} else {
+					el.filterBySearch = false;
+				}
+				
+				return el;
+			});
+
+			return {
+				todoData: newArray
+			}
+
+		})
+	}
+
 	render() {
 
 		const { todoData } = this.state;
@@ -87,8 +154,12 @@ export default class App extends Component {
 				<div className="todo-app">
 					<AppHeader toDo={todoCount} done={doneCount} />
 					<div className="top-panel d-flex">
-						<SearchPanel />
-						<ItemStatusFilter />
+						<SearchPanel
+							onSearchChange={this.filterBySearch} />
+						<ItemStatusFilter 
+							onFilterByActive={this.filterByActive}
+							onFilterByDone={this.filterByDone}
+							onFilterByAll={this.filterByAll} />
 					</div>
 					<TodoList todos={todoData}
 						onDeleted={this.deleteItem}
