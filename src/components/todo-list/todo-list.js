@@ -9,7 +9,7 @@ const TodoList = ({
 	onToggleImportant,
 	onToggleDone }) => {
 
-	const elements = todos.filter((todo) => todo.render && todo.filterBySearch).map((item) => {
+	const elements = todos.map((item) => {
 
 		const { id, ...itemProps } = item;
 
